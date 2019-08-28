@@ -48,6 +48,23 @@ public class EmployeeController {
     @PostMapping(consumes = "application/json")
     public ResponseEntity<List<Employee>> addEmployee(@RequestBody Employee employee) {
         list.add(employee);
+        return ResponseEntity.created(null).build();
+    }
+    @PutMapping(consumes = "application/json")
+    public ResponseEntity<List<Employee>> updateEmployee(@RequestBody Employee employee) {
+        list.add(5,employee);
+        return ResponseEntity.ok(list);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<List<Employee>> updateEmployee(@PathVariable int id) {
+        Employee employee = null;
+        for(Employee e:list){
+            if(e.getId() == id){
+                employee = e;
+            }
+        }
+        list.remove(employee);
         return ResponseEntity.ok(list);
     }
 }
